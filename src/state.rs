@@ -1,12 +1,12 @@
 pub struct State {
-    ram: [u8; 4096],  // 4 KB RAM
-    reg: [u8; 16],    // General-purpose 8-bit registers
-    pc: u16,          // Program counter
-    dt: u8,           // Delay timer
-    st: u8,           // Sound timer
-    i: u16,           // I-register
-    sp: u8,           // Stack pointer
-    stack: [u16; 16], // Stack
+    pub ram: [u8; 4096],  // 4 KB RAM
+    pub reg: [u8; 16],    // General-purpose 8-bit registers
+    pub pc: u16,          // Program counter
+    pub dt: u8,           // Delay timer
+    pub st: u8,           // Sound timer
+    pub i: u16,           // I-register
+    pub sp: u8,           // Stack pointer
+    pub stack: [u16; 16], // Stack
 }
 
 impl State {
