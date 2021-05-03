@@ -1,4 +1,4 @@
-pub struct Cpu {
+pub struct State {
     ram: [u8; 4096],  // 4 KB RAM
     reg: [u8; 16],    // General-purpose 8-bit registers
     pc: u16,          // Program counter
@@ -9,9 +9,9 @@ pub struct Cpu {
     stack: [u16; 16], // Stack
 }
 
-impl Cpu {
-    pub fn new(start_from: u16) -> Cpu {
-        Cpu {
+impl State {
+    pub fn new(start_from: u16) -> State {
+        State {
             ram: [0; 4096],
             reg: [0; 16],
             pc: start_from,
