@@ -210,7 +210,7 @@ impl Chip8<'_> {
                     _ => return Err("Invalid instruction")
                 }
             },
-            _ => panic!("Should never happen! Open an issue on github!")
+            _ => unreachable!()
         }
         self.state.pc += 2;
         Ok(())
