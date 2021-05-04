@@ -28,7 +28,7 @@ impl Display {
 
         let mut l = [false; 8];
         for i in 0..7 {
-            l[i] = if (b & (0b1 << i)) >> i == 1 {true} else {false}
+            l[i] = if (b & (0b10000000 >> i)) >> 7-i == 1 {true} else {false}
         };
 
         for (i, e) in l.iter().enumerate() {
