@@ -1,6 +1,7 @@
 pub struct Display {
     size: (usize, usize),
-    d: [[bool; 128]; 64]
+    d: [[bool; 128]; 64],
+    dirty: bool
 }
 
 impl Display {
@@ -9,7 +10,8 @@ impl Display {
             d: [[false; 128]; 64],
             size: {
                 if big {(128, 64)} else {(64, 32)}
-            }
+            },
+            dirty: false
         }
     }
 
@@ -21,6 +23,8 @@ impl Display {
         let y = y % self.size.1;
 
         let mut erased = false;
+
+        self.dirty = true;
 
         let mut l = [false; 8];
         for i in 0..7 {
@@ -37,12 +41,17 @@ impl Display {
         erased
     }
 
-    pub fn read(&self) -> &[[bool; 128]; 64] {
+    pub fn read(&mut self) -> &[[bool; 128]; 64] {
+        self.dirty = false;
         return &self.d
     }
 
     pub fn size(&self) -> (usize, usize) {
         return self.size
+    }
+    
+    pub fn dirty(&self) -> bool {
+        return self.dirty
     }
 }
 
