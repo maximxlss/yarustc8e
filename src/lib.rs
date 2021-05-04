@@ -88,7 +88,7 @@ impl Chip8<'_> {
             0x1000 => /*JP*/ self.state.pc = nnn() as usize - 2,
             0x2000 => /*CALL*/ {
                 self.stack_push(self.state.pc);
-                self.state.pc = nnn() as usize;
+                self.state.pc = nnn() as usize - 2;
             },
             0x3000 => /*SE*/ {
                 if self.state.reg[x() as usize] == kk() {
