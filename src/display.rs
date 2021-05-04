@@ -36,6 +36,14 @@ impl Display {
         };
         erased
     }
+
+    pub fn read(&self) -> &[[bool; 128]; 64] {
+        return &self.d
+    }
+
+    pub fn size(&self) -> (usize, usize) {
+        return self.size
+    }
 }
 
 pub const DEFAULT_FONT: [[u8; 5]; 16] = [
