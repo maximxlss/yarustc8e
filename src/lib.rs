@@ -67,7 +67,6 @@ impl Chip8<'_> {
     }
 
     pub fn evolve(&mut self) -> Result<(), &'static str> {
-        self.state.pc += 2;
         let instruction = (self.state.ram[self.state.pc] as usize) << 8 | self.state.ram[self.state.pc+1] as usize;
 
         let nnn = ||  instruction & 0x0FFF;
@@ -80,11 +79,11 @@ impl Chip8<'_> {
             0x0000 => {
                 match instruction {
                     /*CLS*/ 0x00E0 => self.display.clear(),
-                    /*RET*/ 0x00EE => self.state.pc = self.stack_pop(),
+                    /*RET*/ 0x00EE => self.state.pc = self.stack_pop() - 2,
                     /*SYS*/ _ => {}
                 }
             },
-            0x1000 => /*JP*/ self.state.pc = nnn() as usize,
+            0x1000 => /*JP*/ self.state.pc = nnn() as usize - 2,
             0x2000 => /*CALL*/ {
                 self.stack_push(self.state.pc);
                 self.state.pc = nnn() as usize;
@@ -159,7 +158,7 @@ impl Chip8<'_> {
                 self.state.i = nnn() as usize
             },
             0xB000 => { /*JP*/
-                self.state.pc = self.state.reg[0] as usize + nnn() as usize
+                self.state.pc = self.state.reg[0] as usize + nnn() - 2 as usize
             },
             0xC000 => { /*RND*/
                 let mut rng = rand::thread_rng();
@@ -217,6 +216,7 @@ impl Chip8<'_> {
             },
             _ => unreachable!()
         }
+        self.state.pc += 2;
         Ok(())
     }
 }
