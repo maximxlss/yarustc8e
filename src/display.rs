@@ -32,7 +32,7 @@ impl Display {
             if self.d[y][dx] & e {
                 erased = true
             }
-            self.d[y][dx] = *e
+            self.d[y][dx] ^= *e
         };
         erased
     }
