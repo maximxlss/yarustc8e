@@ -2,7 +2,7 @@
 name = "yarustc8e"
 description = "Yet Another Rust Chip-8 Emulator - backend of a Chip-8 emulator."
 repository = "https://github.com/Maxxls/yarustc8e"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["Maxim Kuznetsov <maximxlssoff@gmail.com>"]
 edition = "2018"
 license = "MIT"
