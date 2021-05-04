@@ -43,6 +43,10 @@ impl Chip8<'_> {
         }
     }
 
+    pub fn internal_state(&mut self) -> &mut state::State {
+        &mut self.state
+    }
+
     pub fn timer_step(&mut self) {
         if self.state.dt > 0 {
             self.state.dt -= 1
