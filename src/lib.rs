@@ -69,7 +69,7 @@ impl Chip8<'_> {
     pub fn evolve(&mut self) -> Result<(), &'static str> {
         let instruction = (self.state.ram[self.state.pc] as usize) << 8 | self.state.ram[self.state.pc+1] as usize;
 
-        // println!("{:04x?}${:04x?}", &self.state.pc, &instruction);
+        println!("{:04x?}${:04x?}", &self.state.pc, &instruction);
 
         let nnn = ||  instruction & 0x0FFF;
         let kk  = || (instruction & 0x00FF) as u8;
