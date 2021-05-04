@@ -63,6 +63,7 @@ impl Chip8<'_> {
     }
 
     pub fn evolve(&mut self) -> Result<(), &'static str> {
+        self.state.pc += 2;
         let instruction = (self.state.ram[self.state.pc] as usize) << 8 | self.state.ram[self.state.pc+1] as usize;
 
         let nnn = ||  instruction & 0x0FFF;
@@ -212,7 +213,6 @@ impl Chip8<'_> {
             },
             _ => unreachable!()
         }
-        self.state.pc += 2;
         Ok(())
     }
 }
