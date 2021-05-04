@@ -33,6 +33,16 @@ impl Chip8<'_> {
         }
     }
 
+    pub fn load(&mut self, program: Vec<u8>, to: Option<usize>) {
+        let to = match to {
+            None => self.state.pc,
+            Some(v) => v
+        };
+        for (i, b) in program.iter().enumerate() {
+            self.state.ram[to+i] = *b;
+        }
+    }
+
     pub fn timer_step(&mut self) {
         if self.state.dt > 0 {
             self.state.dt -= 1
