@@ -1,6 +1,41 @@
-pub enum Display {
-    Default([[bool; 64]; 32]),
-    Big([[bool; 128]; 64]),
+pub struct Display {
+    size: (usize, usize),
+    d: [[bool; 128]; 64]
+}
+
+impl Display {
+    pub fn new(big: bool) -> Display {
+        Display{
+            d: [[false; 128]; 64],
+            size: {
+                if big {(128, 64)} else {(64, 32)}
+            }
+        }
+    }
+
+    pub fn clear(&mut self) {
+        self.d = [[false; 128]; 64]
+    }
+    
+    pub fn write(&mut self, b: u8, x: usize, y: usize) -> bool {
+        let y = y % self.size.1;
+
+        let mut erased = false;
+
+        let mut l = [false; 8];
+        for i in 0..7 {
+            l[i] = if (b & (0b1 << i)) >> i == 1 {true} else {false}
+        };
+
+        for (i, e) in l.iter().enumerate() {
+            let dx = (x+i)%self.size.1;
+            if self.d[y][dx] & e {
+                erased = true
+            }
+            self.d[y][dx] = *e
+        };
+        erased
+    }
 }
 
 pub const DEFAULT_FONT: [[u8; 5]; 16] = [
