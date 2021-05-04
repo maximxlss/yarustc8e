@@ -7,7 +7,7 @@ use rand::Rng;
 
 pub struct Chip8<'a> {
     state: state::State,
-    display: display::Display,
+    pub display: display::Display,
     font: [[u8; 5]; 16],
     key_state_handler: &'a dyn Fn(u8) -> bool,
     key_wait_handler: &'a dyn Fn() -> u8
